@@ -86,6 +86,8 @@ public class Main {
 		 * 
 		 * 
 		 */
+		
+		//testando
 
 		ArrayList<byte[]> dadosAll = new ArrayList();
 
