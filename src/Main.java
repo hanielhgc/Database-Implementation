@@ -9,6 +9,32 @@ import javax.swing.JOptionPane;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
+
+
+
+
+		int n = 200;
+
+		int contContainer;
+		int contBlocos=0;
+
+		int contByte;
+
+		byte controle[] = new byte[n];
+
+		byte conteudo2[];
+
+
+		//conteudo2 = conteudo.getBytes();
+		int ultimoI = 0;
+
+
+		ArrayList<byte[]> dadosAll = new ArrayList();
+
+
+
+
+
 		Scanner scanner = new Scanner(System.in);
 		String conteudo = "";
 
@@ -32,7 +58,20 @@ public class Main {
 				conteudo = conteudo + "\n" + linha;
 
 				linha = lerArq.readLine(); // lê da segunda até a última linha
+			
+				byte conteudo3[] = new byte[n];
+				System.out.println(linha);
+				if(linha!= null) {
+				conteudo3=linha.getBytes();
+				}
+				//***adicionar aqui
 
+				if(conteudo3!= null) {
+					
+				
+				dadosAll.add(conteudo3);
+				}
+				
 			}
 
 			arq.close();
@@ -40,65 +79,21 @@ public class Main {
 			System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage());
 		}
 
-		// inserir aqui
-
-		int n = 20;
-
-		int contContainer;
-		int contBlocos=0;
-
-		int contByte;
-
-		// byte dados[] = new byte[n];
-		byte controle[] = new byte[n];
-
-		byte conteudo2[];
-
-		// ArrayList<byte[]> dadosAll = new ArrayList();
-
-		// dados[0]=0;
-
-		// descobrir quantos bytes sao usados para cada caractere de string - 2
-		// bytes
-		// fazer a tabela para conversao binario-inteiro
-		// metodo que recebe um array de bytes e retorna um inteiro
-		//
-
-		// diferença entre byte 0 para 1,2,3
-		// byte 4?
-		// bytes 5, 6 e 7 são para saber onde parei na gravação de um bloco de
-		// dados certo? isso
-
-		conteudo2 = conteudo.getBytes();
-		int ultimoI = 0;
-		/*
-		 * int valorDeI=0; for (int i = 0; i < conteudo2.length; i++) {
-		 * 
-		 * 
-		 * try { dados[i]=conteudo2[i]; } catch (ArrayIndexOutOfBoundsException
-		 * e) { valorDeI=i;
-		 * 
-		 * 
-		 * } }
-		 * 
-		 * byte dados2[] = new byte[n]; for (int i = 0; i < dados2.length; i++)
-		 * { if(valorDeI+i>=n*2){ break; } dados2[i]=conteudo2[valorDeI+i]; }
-		 * 
-		 * 
-		 */
 		
-		//testando
+		
 
-		ArrayList<byte[]> dadosAll = new ArrayList();
+		
 
+		/*
 		armazenar(ultimoI, conteudo2, n, dadosAll, contBlocos);
 
 		for (int i = 0; i < dadosAll.get(1).length; i++) {
 			System.out.println(dadosAll.get(1)[i]);
 		}
 
-		// System.out.println(dados[0]);
-		// System.out.println(dados[1]);
+		*/
+
+		
 
 		// String msgDecode = new String(dados, "UTF-8");
 
@@ -126,6 +121,23 @@ public class Main {
 		
 		
 		return vetorFinal;
+	}
+	
+	public static void metaBlocoDeDados(byte idContainer, byte[] idBloco, byte tipo, byte[] utilizado) {
+		
+		byte metadados[] = new byte[9];
+		metadados[0]=idContainer;
+		
+		for (int i = 0; i < idBloco.length; i++) {
+			metadados[i+1]=idBloco[i];
+		}
+		
+		metadados[4]=tipo;
+		
+		for (int i = 0; i < utilizado.length; i++) {
+			metadados[4+i]=utilizado[i];
+		}
+		
 	}
 
 	public static void armazenar(int ultimoI, byte conteudo2[], int n, ArrayList<byte[]> dadosAll, int contBlocos) {
