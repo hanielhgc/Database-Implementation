@@ -15,7 +15,10 @@ public class Main {
 
 		int n = 200;
 
-		int contContainer;
+		byte tipoBloco=0;
+		byte contContainer0=0;
+		
+		int contContainer=0;
 		int contBlocos=0;
 
 		int contByte;
@@ -27,10 +30,12 @@ public class Main {
 
 		//conteudo2 = conteudo.getBytes();
 		int ultimoI = 0;
+		
+		byte[] blocoFinal = new byte[n+9];
 
 
 		ArrayList<byte[]> dadosAll = new ArrayList();
-
+		ArrayList<byte[]> dadosFinaisAll = new ArrayList();
 
 
 
@@ -59,18 +64,34 @@ public class Main {
 
 				linha = lerArq.readLine(); // lê da segunda até a última linha
 			
+				byte meta[] = new byte[9];
 				byte conteudo3[] = new byte[n];
 				System.out.println(linha);
 				if(linha!= null) {
 				conteudo3=linha.getBytes();
+				meta=metaBlocoDeDados(contContainer0, Integer.toString(contBlocos).getBytes(), tipoBloco, Integer.toString(conteudo3.length).getBytes());
+				blocoFinal = vectorMerge(meta, conteudo3);
+				contBlocos++;
+						
 				}
 				//***adicionar aqui
+				
 
 				if(conteudo3!= null) {
 					
 				
 				dadosAll.add(conteudo3);
+				dadosFinaisAll.add(blocoFinal);
+				//testar
+				
+				
 				}
+				
+				
+
+					
+				
+				
 				
 			}
 
@@ -123,7 +144,8 @@ public class Main {
 		return vetorFinal;
 	}
 	
-	public static void metaBlocoDeDados(byte idContainer, byte[] idBloco, byte tipo, byte[] utilizado) {
+	public static byte[] metaBlocoDeDados(byte idContainer, byte[] idBloco, byte tipo, byte[] utilizado) {
+		
 		
 		byte metadados[] = new byte[9];
 		metadados[0]=idContainer;
@@ -137,6 +159,8 @@ public class Main {
 		for (int i = 0; i < utilizado.length; i++) {
 			metadados[4+i]=utilizado[i];
 		}
+		
+		return metadados;
 		
 	}
 
