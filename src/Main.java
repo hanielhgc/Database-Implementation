@@ -125,19 +125,33 @@ public class Main {
 		}
 
 		// System.out.println(msgDecode);
+		
+		
+		
+		
+		
+		imprimirVetor(blocoFinal);
 
 	}
 	
+	public static void imprimirVetor(byte vetor[]){
+		
+		for (int i = 0; i < vetor.length; i++) {
+			System.out.println(vetor[i]);
+		}
+		
+	}
+	
 	public static byte[] vectorMerge(byte vetor1[], byte vetor2[]){
-		byte vetorFinal[] = new byte[vetor1.length+vetor2.length];
+byte vetorFinal[] = new byte[vetor1.length+vetor2.length];
 		
 		for (int i = 0; i < vetor1.length; i++) {
 			vetorFinal[i]=vetor1[i];
 			
 		}
 		
-		for (int i = vetor1.length; i < vetor1.length + vetor2.length; i++) {
-			vetorFinal[i]=vetor2[i];
+		for (int i = 0; i < vetor2.length; i++) {
+			vetorFinal[i+vetor1.length]=vetor2[i];
 		}
 		
 		
